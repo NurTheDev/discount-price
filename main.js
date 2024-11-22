@@ -10,7 +10,7 @@
  * todo 9: add a function which will show the discounted price
  * todo 10: add a function which will show the final price
  */
-let input = +prompt("Enter your Price: ");
+let input = +prompt("Enter your product Price: ");
 let vatPrice = (userPrice = 0, vat = 0.15) => {
   const vatAmount = userPrice * vat;
   let price = userPrice + vatAmount;
