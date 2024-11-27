@@ -108,4 +108,50 @@ let foodFun = (foodInput) => {
 };
 
 let price = foodFun(userInput);
-console.log("Selected food price: ", price);
+let vatPrice = (price = 0) => {
+  let vat = 0;
+  if (price > 100) {
+    vat = 0.25;
+  } else if (price > 500) {
+    vat = 0.2;
+  } else if (price > 1000) {
+    vat = 0.15;
+  } else {
+    vat = 0.1;
+  }
+  const vatAmount = price * vat;
+  const priceWithVat = price + vatAmount;
+  return { priceWithVat, vatAmount, vat };
+};
+let { priceWithVat, vatAmount, vat } = vatPrice(price);
+let discount = (price = 0) => {
+  let discountAmount = 0;
+  if (price > 100) {
+    discountAmount = price - price * 0.1;
+  } else if (price > 500) {
+    discountAmount = price - price * 0.2;
+  } else if (price > 1000) {
+    discountAmount = price - price * 0.3;
+  } else {
+    discountAmount = price;
+  }
+  return discountAmount;
+};
+
+let priceWithDiscount = discount(priceWithVat);
+
+let showPrice = () => {
+  console.log(`
+    ----------------------------- invoice -----------------------------
+                        Your Main Price is  : ${price}
+                        Vat %               : ${vat * 100}%
+                        Vat Amount          : ${vatAmount}
+                        Price with VAT      : ${priceWithVat}
+                        Discount            : ${
+                          priceWithVat - priceWithDiscount
+                        }
+                        Price after Discount: ${priceWithDiscount}
+    --------------------------------------------------------------------
+    `);
+};
+showPrice();
